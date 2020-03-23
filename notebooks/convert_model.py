@@ -21,7 +21,7 @@ import onnx_caffe2.backend as backend
 
 CAFFE2_MODEL = '../backend/server/app/checkpoints/caffe2_model.proto'
 PYTORCH_MODEL = '../backend/server/app/checkpoints/chk_resnet_50_epoch_14.pt'
-CHECK_CONVERTED_MODEL = False
+CHECK_CONVERTED_MODEL = True
 
 
 # TODO: This comes from the notebook (Model.ipynb): can we refactor it in a single place?
@@ -48,7 +48,7 @@ def run():
     output_torch = model(dummy_input)
 
     # Export ONNX model
-    torch.onnx.export(model, dummy_input, CAFFE2_MODEL, verbose=True)
+    torch.onnx.export(model, (dummy_input,), CAFFE2_MODEL, verbose=True)
     print(f'converted pytorch model: {PYTORCH_MODEL} to: {CAFFE2_MODEL}')
 
     if CHECK_CONVERTED_MODEL:

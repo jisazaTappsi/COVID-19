@@ -1,4 +1,4 @@
-FROM python:3.7-slim-stretch
+FROM python:3.6-slim-stretch
 
 RUN apt-get update && apt-get install -y git python3-dev gcc \
     && rm -rf /var/lib/apt/lists/*
@@ -9,6 +9,6 @@ COPY app app/
 
 RUN pip install -r app/requirements.txt --upgrade
 
-EXPOSE 5562
+#EXPOSE 5562
 
-ENTRYPOINT ["python", "app/server.py"]
+#ENTRYPOINT ["python", "app/server.py"]
